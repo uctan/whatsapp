@@ -2,12 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tanapp/common/mode/theme_notifier.dart';
 
 import 'package:tanapp/common/routes/routes.dart';
 import 'package:tanapp/common/theme/dark_theme.dart';
 import 'package:tanapp/common/theme/light_theme.dart';
 import 'package:tanapp/feature/auth/controller/auth_controller.dart';
-import 'package:tanapp/feature/contact/pages/contact_page.dart';
 import 'package:tanapp/feature/home/pages/home_page.dart';
 
 import 'package:tanapp/feature/welcome/pages/welcom_page.dart';
@@ -29,16 +29,16 @@ void main() async {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeNotifierProvider);
+
     return MaterialApp(
       title: 'WhatsApp by Tan',
       debugShowCheckedModeBanner: false,
-      theme: darkTheme(),
+      theme: lightTheme(),
       darkTheme: darkTheme(),
-      themeMode: ThemeMode.system,
-      // home: const ContactPage(),
+      themeMode: themeMode,
       home: ref.watch(userInfoAuthProvider).when(
         data: (user) {
           FlutterNativeSplash.remove();

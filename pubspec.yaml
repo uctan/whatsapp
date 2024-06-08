@@ -53,6 +53,10 @@ dependencies:
   uuid: ^4.4.0
   custom_clippers: ^2.0.0
   shimmer: ^3.0.0
+  zego_uikit_prebuilt_call: ^4.11.2
+  # zego_uikit_prebuilt_call: ^4.11.0
+ 
+
 
 
 flutter_native_splash:

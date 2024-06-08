@@ -2,11 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tanapp/common/mode/theme_notifier.dart';
 import 'package:tanapp/common/widgets/custom_icon_button.dart';
 import 'package:tanapp/feature/auth/controller/auth_controller.dart';
+import 'package:tanapp/feature/chat/widget/custom_list_title.dart';
 import 'package:tanapp/feature/home/pages/call_home_page.dart';
 import 'package:tanapp/feature/home/pages/chat_home_page.dart';
 import 'package:tanapp/feature/home/pages/status_home_page.dart';
+// Import the theme notifier
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -40,6 +43,9 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = ref.read(themeNotifierProvider.notifier);
+    final isDarkMode = ref.watch(themeNotifierProvider) == ThemeMode.dark;
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -59,16 +65,32 @@ class _HomePageState extends ConsumerState<HomePage> {
             splashFactory: NoSplash.splashFactory,
             tabs: [
               Tab(text: 'CHATS'),
-              Tab(text: 'STATUS'),
+              Tab(text: 'GROUPS'),
               Tab(text: 'CALLS'),
             ],
           ),
         ),
-        body: TabBarView(
+        body: Column(
           children: [
-            ChatHomePage(),
-            StatusHomePage(),
-            CallHomePage(),
+            CustomListTitle(
+              title: 'Dark Or Light',
+              leading: Icons.light_mode,
+              trailing: Switch(
+                value: isDarkMode,
+                onChanged: (value) {
+                  themeNotifier.toggleTheme(value);
+                },
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  ChatHomePage(),
+                  StatusHomePage(),
+                  CallHomePage(),
+                ],
+              ),
+            ),
           ],
         ),
       ),

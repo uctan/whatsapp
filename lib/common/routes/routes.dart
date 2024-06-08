@@ -4,6 +4,7 @@ import 'package:tanapp/common/models/user_model.dart';
 import 'package:tanapp/feature/auth/pages/login_page.dart';
 import 'package:tanapp/feature/auth/pages/usser_info_page.dart';
 import 'package:tanapp/feature/auth/pages/verication_page.dart';
+import 'package:tanapp/feature/chat/pages/call_page.dart';
 import 'package:tanapp/feature/chat/pages/chat_page.dart';
 import 'package:tanapp/feature/chat/pages/profile_page.dart';
 import 'package:tanapp/feature/contact/pages/contact_page.dart';
@@ -61,7 +62,12 @@ class Routes {
             user: user,
           ),
         );
-
+      // case callvideo:
+      //   return MaterialPageRoute(
+      //     builder: (context) => const CallPage(
+      //       builder
+      //     ),
+      //   );
       case profile:
         final UserModel user = settings.arguments as UserModel;
         return PageTransition(

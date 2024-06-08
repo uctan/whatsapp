@@ -15,6 +15,7 @@ import 'package:tanapp/common/routes/routes.dart';
 import 'package:tanapp/common/widgets/custom_icon_button.dart';
 import 'package:tanapp/feature/auth/controller/auth_controller.dart';
 import 'package:tanapp/feature/chat/controller/chat_controller.dart';
+import 'package:tanapp/feature/chat/pages/call_page.dart';
 import 'package:tanapp/feature/chat/widget/chat_text_field.dart';
 import 'package:tanapp/feature/chat/widget/message_card.dart';
 import 'package:tanapp/feature/chat/widget/show_date_card.dart';
@@ -156,7 +157,17 @@ class ChatPage extends ConsumerWidget {
         ),
         actions: [
           CustomIconButton(
-            onTap: () {},
+            onTap: () {
+              debugPrint(' callID Zego: ${user.uid}');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CallPageZego(
+                    callID: 'abcs',
+                  ),
+                ),
+              );
+            },
             icon: Icons.video_call,
           ),
           CustomIconButton(onTap: () {}, icon: Icons.call),
